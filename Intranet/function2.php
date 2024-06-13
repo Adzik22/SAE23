@@ -1,20 +1,29 @@
-    <?php
+<?php
     function creer_header() {
+        // Déclarer la variable pour stocker le message d'erreur
         $erreur = '';
+        // Vérifier si le formulaire de connexion a été soumis
         if(isset($_POST['pseudo']) && isset($_POST['motdepasse'])) {
+            // Charger les utilisateurs depuis le fichier JSON
             $utilisateurs = json_decode(file_get_contents('employer.json'), true);
+            // Vérifier les informations de connexion
             $connexion_reussie = false;
             foreach ($utilisateurs as $utilisateur) {
                 if ($utilisateur['utilisateur'] === $_POST['pseudo'] && password_verify($_POST['motdepasse'], $utilisateur['motdepasse'])) {
                     $_SESSION['pseudo'] = $_POST['pseudo'];
+                    // Marquer la connexion comme réussie
                     $connexion_reussie = true;
-                    break;
+                    break; // Sortir de la boucle une fois la connexion réussie
                 }
             }
-            if(!$connexion_reussie) {
-                $erreur = 'Identifiant ou mot de passe incorrect.';
-            }
-        }     
+        // Si la connexion est réussie, rediriger vers accueil.php
+        if($connexion_reussie) {
+            header('Location: Accueil.php');
+            exit();
+        } else {
+            $erreur = 'Identifiant ou mot de passe incorrect.';
+        }
+    }
         echo '
         <!DOCTYPE html>
         <html lang="en">
@@ -25,7 +34,7 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" href="styles.css">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-            <style>         
+            <style>
             .custom-header {
                 background-image: url("logo.jpeg");
                 background-size: cover; 
@@ -39,7 +48,7 @@
         <body>  
         <div class="container-fluid p-5 custom-header">
             <h1>Fulguro Miam</h1>
-            <p>Site de fast food IUT R&T Saint Malo</p>';
+            <p>Intranet</p>';
         // Afficher le message d'erreur s'il y en a un
         if(!empty($erreur)) {
             echo '<div class="alert alert-danger" role="alert">' . $erreur . '</div>';
@@ -70,13 +79,14 @@
         // Déconnexion de l'utilisateur en supprimant la variable de session
         unset($_SESSION['pseudo']);
         // Recharger la page actuelle pour mettre à jour l'affichage
-        header("Refresh:0");
+        header('Location: ../SiteVitrine/index.php');
         exit();
     }
     echo '</div>
     </body>
     </html>';
 }
+
 function creer_navbar() {
     echo '
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -86,25 +96,7 @@ function creer_navbar() {
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="menu.php">Menu <span class="sr-only"></span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="commander.php">Commander</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="admin.php">Administrer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profil.php">Mon Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="inscription.php">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="infos.php">Infos</a>
-                </li>
-                                <li class="nav-item">
                     <a class="nav-link" href="Cloud.php">Cloud</a>
                 </li>
             </ul>
@@ -132,94 +124,5 @@ function creer_footer()
             </div>
         </footer>';
 }
-function creer_inscription() {
-    echo '
-    <div style="margin-right: auto; margin-left: auto; width: 50%; text-align: center;">
-        <div style="margin-right: 10px; margin-left: 5px; border-bottom: 1px dotted grey; border-radius: 10px 0px 0 0; padding-top: 10px; padding-bottom: 10px; font-family: "Lucida Handwriting", Arial, serif; text-align:left; padding-left: 15px; font-size: 1.5em; color: #333;">Inscription</div>
-        <form action="validation.php" method="post" style="margin-top: 20px; text-align: left;">
-            <div style="padding: 10px; border-radius: 10px; background-color: #f9f9f9; display: inline-block; text-align: left;">
-                <p><label for="Pseudo" style="font-size: 1.2em;">Pseudo</label><br/> <input placeholder="Pseudo" id="Pseudo" name="Pseudo" class="input_perso"/></p>
-                <p><label for="Mail" style="font-size: 1.2em;">Adresse Mail</label><br/> <input placeholder="Exemple: nom@nom.com" id="Mail" name="Mail" class="input_perso"/></p>
-                <p><label for="mdp" style="font-size: 1.2em;">Mot de passe</label><br/> <input type="password" placeholder="Mot de passe" id="MDP" name="MotDePasse" class="input_perso"/></p>
-                <p><button type="submit" style="background-color: #333; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.2em;">S\'inscrire</button></p>
-            </div>
-        </form>
-    </div>
-    ';
-}
-function modifier_profil() {
-    echo '<main>
-        <div class="container">
-            <h1>Modifier votre profil</h1>'; 
-    // Charger les informations de l'utilisateur à partir du fichier JSON
-    $utilisateur = null;
-    $pseudo = $_SESSION['pseudo']; // Supposons que le pseudo soit stocké dans la session
-    $utilisateurs = json_decode(file_get_contents('employer.json'), true);
 
-    // Trouver l'utilisateur correspondant au pseudo
-    foreach ($utilisateurs as $user) {
-        if ($user['utilisateur'] === $pseudo) {
-            $utilisateur = $user;
-            break;
-        }
-    }
-
-    if ($utilisateur) {
-        // Traitement du formulaire de modification du profil
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Gérer la modification du véhicule
-            $nouveauVehicule = isset($_POST['vehicule']) ? $_POST['vehicule'] : null;
-            if ($nouveauVehicule !== null) {
-                // Mettre à jour les informations de l'utilisateur dans le tableau
-                $utilisateur['vehicule'] = $nouveauVehicule;
-                // Enregistrer les modifications dans le fichier JSON
-                $index = array_search($pseudo, array_column($utilisateurs, 'utilisateur'));
-                $utilisateurs[$index]['vehicule'] = $nouveauVehicule;
-                file_put_contents('employer.json', json_encode($utilisateurs));
-            }
-
-            // Gérer la modification du mot de passe
-            $nouveauMotDePasse = isset($_POST['motdepasse']) ? $_POST['motdepasse'] : null;
-            if ($nouveauMotDePasse !== null) {
-                // Mettre à jour les informations de l'utilisateur dans le tableau
-                $utilisateur['motdepasse'] = password_hash($nouveauMotDePasse, PASSWORD_DEFAULT);
-                // Enregistrer les modifications dans le fichier JSON
-                $index = array_search($pseudo, array_column($utilisateurs, 'utilisateur'));
-                $utilisateurs[$index]['motdepasse'] = $utilisateur['motdepasse'];
-                file_put_contents('employer.json', json_encode($utilisateurs));
-            }
-
-            // Gérer la modification de l'adresse email
-            $nouvelleEmail = isset($_POST['email']) ? $_POST['email'] : null;
-            if ($nouvelleEmail !== null) {
-                // Mettre à jour les informations de l'utilisateur dans le tableau
-                $utilisateur['email'] = $nouvelleEmail;
-                // Enregistrer les modifications dans le fichier JSON
-                $index = array_search($pseudo, array_column($utilisateurs, 'utilisateur'));
-                $utilisateurs[$index]['email'] = $nouvelleEmail;
-                file_put_contents('employer.json', json_encode($utilisateurs));
-            }
-        }
-        echo '<form method="post" enctype="multipart/form-data">
-                <label for="vehicule">Véhicule actuel: ' . (isset($utilisateur['vehicule']) ? $utilisateur['vehicule'] : '') . '</label><br>
-                <input type="text" id="vehicule" name="vehicule" placeholder="Nouveau véhicule"><br><br>
-
-                <label for="motdepasse">Nouveau mot de passe:</label><br>
-                <input type="password" id="motdepasse" name="motdepasse" placeholder="Nouveau mot de passe"><br><br>
-
-                <label for="email">Nouvelle adresse email:</label><br>
-                <input type="email" id="email" name="email" placeholder="Nouvelle adresse email"><br><br>
-
-                <label for="image">Choisir une nouvelle image de profil:</label><br>
-                <input type="file" id="image" name="image"><br><br>
-
-                <button type="submit">Enregistrer les modifications</button>
-            </form>';
-    } else {
-        echo "Utilisateur non trouvé.";
-    }
-    echo '</div>
-    </main>';
-    echo '</div></div>';
-}
 ?>
