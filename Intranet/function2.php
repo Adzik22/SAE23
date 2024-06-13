@@ -24,6 +24,7 @@
             $erreur = 'Identifiant ou mot de passe incorrect.';
         }
     }
+
         echo '
         <!DOCTYPE html>
         <html lang="en">
