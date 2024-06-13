@@ -44,8 +44,7 @@
             }
             </style>
         </head>
-        <body>
-
+        <body>  
         <div class="container-fluid p-5 custom-header">
             <h1>Fulguro Miam</h1>
             <p>Site de fast food IUT R&T Saint Malo</p>';
