@@ -13,7 +13,6 @@ include 'function2.php';
         </div>
     </div>
 </main>
-
 <?php
 creer_header(); 
 ?>
