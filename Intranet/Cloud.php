@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'function.php'; 
+include 'function2.php'; 
 
 // Chemin de base pour le stockage des fichiers
 $basePath = 'C:/wamp64/www/SAE INFORMATIQUE FAST FOOD/SAE INFORMATIQUE/Site Intranet/TP_R209_2/TP R209/';
