@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if (!isset($_SESSION['USER'])) {
@@ -14,6 +13,7 @@ creer_navbar();
 ?>
 
 <main>
+    <body>
     <div class="container">
         <h1>Bienvenue sur Fulguro Miam !</h1>
         <p>Le site de restauration rapide qui satisfait vos envies gourmandes.</p>
@@ -40,6 +40,7 @@ creer_navbar();
             </div>
         </div>
     </div>
+    </body>
 </main>
 
 <style>
@@ -94,5 +95,5 @@ creer_navbar();
 </style>
 
 <?php
-creer_footer(); 
+creer_footer();
 ?>
