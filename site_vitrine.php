@@ -13,7 +13,7 @@
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link active" href="site_vitrine.php">Acceuil</a>
+        <a class="nav-link active" href="site_vitrine.php">Accueil</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="fournisseurs.php">Fournisseurs</a>
