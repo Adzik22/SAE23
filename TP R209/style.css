@@ -1,0 +1,48 @@
+/* Style pour le corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style pour le conteneur principal */
+.container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Style pour le titre principal */
+h1 {
+    color: #333333;
+}
+
+/* Style pour le texte principal */
+p {
+    color: #666666;
+}
+
+/* Style pour la barre de navigation */
+.navbar {
+    background-color: #343a40;
+}
+
+/* Style pour les liens dans la barre de navigation */
+.navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+/* Style pour le pied de page */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
