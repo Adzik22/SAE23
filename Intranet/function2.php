@@ -102,16 +102,16 @@ function creer_navbar() {
                     <a class="nav-link" href="Cloud.php">Cloud_Perso</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Inscription.php">inscriptions</a>
+                    <a class="nav-link" href="inscription.php">Inscriptions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Annuaire_clients.php">Annuaire_clients</a>
+                    <a class="nav-link" href="Annuaire_clients.php">Nos clients</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Annuaire_employer.php">Annuaire_employer</a>
+                    <a class="nav-link" href="annuaire_employes.php">Nos employés</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Annuaire_partenaires.php">Annuaire_partenaires</a>
+                    <a class="nav-link" href="Annuaire_partenaires.php">Nos partenaires</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Wiki.php">Wiki</a>
