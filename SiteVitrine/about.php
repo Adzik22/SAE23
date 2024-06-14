@@ -1,6 +1,14 @@
 <?php
+session_start();
+
+include 'function.php'; 
+creer_header(); 
+creer_navbar(); 
+?>
+
+
+<?php
 // Inclusion de votre fichier function.php s'il contient des fonctions nécessaires
-include 'function.php';
 
 // Chemin vers le fichier JSON des employés
 $chemin_json = 'employer.json';
