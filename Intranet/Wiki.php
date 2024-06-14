@@ -1,17 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['USER'])) {
-    $_SESSION['USER'] = "anonymous";
-    $_SESSION['email'] = "";
-    $_SESSION['role'] = "visitor";
-}
-include 'function2.php'; 
-creer_header(); 
-creer_navbar(); 
-?>
-
-
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -44,10 +30,10 @@ creer_navbar();
             <h2>Identité Graphique Numérique</h2>
 
             <h3>Définition d'un Logo</h3>
-            <p>Nous avons entrepris de renouveler l'image de notre entreprise en créant un nouveau logo. Ce logo met en avant le nom de notre entreprise</p>
+            <p>Nous avons entrepris de renouveler l'image de notre entreprise en créant un nouveau logo. Ce logo met en avant le nom de notre entreprise et notre ville d'origine, St-Malo.</p>
 
             <h3>Charte Graphique</h3>
-            <p>Pour le design du site vitrine et de l'intranet, nous utilisons Bootstrap comme base. Le style CSS est personnalisé avec les couleurs de l'entreprise.</p>
+            <p>Pour le design du site vitrine et de l'intranet, nous utilisons Bootstrap comme base. Le style CSS est personnalisé avec les couleurs de l'entreprise. Les modifications de style sont effectuées dans un fichier CSS spécifique, importé après le CSS par défaut de Bootstrap.</p>
         </div>
 
         <div class="content-section">
@@ -68,6 +54,9 @@ creer_navbar();
 
             <h3>Accueil</h3>
             <p>La page d'accueil offre une description générale de notre entreprise.</p>
+
+            <h3>Activités</h3>
+            <p>Cette page détaille les différentes activités de l'entreprise.</p>
 
             <h3>Partenaires</h3>
             <p>Nous affichons les logos et les descriptions de nos partenaires.</p>
@@ -105,8 +94,3 @@ creer_navbar();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-<?php
-creer_footer(); 
-?>
