@@ -14,5 +14,6 @@ creer_navbar();
     <div class="container">
         <h1>Bienvenue sur L'intranet</h1>
 <?php
-creer_footer(); 
+creer_inscription();
+creer_footer();
 ?>
