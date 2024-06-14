@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'function.php'; 
+include 'function2.php'; 
 creer_header(); 
 creer_navbar(); 
 ?>
