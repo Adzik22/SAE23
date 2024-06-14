@@ -5,7 +5,7 @@ include 'function2.php';
 creer_header(); 
 creer_navbar(); 
 // Chemin de base pour le stockage des fichiers
-define('BASE_PATH', '/var/www/html/SAE23/Intranet');
+define('BASE_PATH', '/var/www/html/Intranet/');
 define('EMPLOYER_JSON', BASE_PATH . 'employer.json');
 define('UPLOAD_DIR', BASE_PATH . 'groupes/');
 
