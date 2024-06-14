@@ -132,7 +132,7 @@ function creer_navbar() {
                     <a class="nav-link" href="activite.php" style="color: black;">Activité</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="partenaires.php" style="color: black;">Partenaires</a>
+                    <a class="nav-link" href="fournisseurs.php" style="color: black;">Partenaires</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="about.php" style="color: black;">About</a>
