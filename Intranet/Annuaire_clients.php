@@ -1,83 +1,73 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des Clients</title>
-    <style>
-        /* Style CSS pour le tableau */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-        table {
-            width: 80%;
-            margin: 20px auto;
-            background-color: #fff;
-            border-collapse: collapse;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        h2 {
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
+<?php
+session_start();
 
-<h2>Liste des Clients</h2>
+include 'function.php'; 
+creer_header(); 
+creer_navbar(); 
+?>
 
-<table>
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        // Chemin vers le fichier JSON
-        $jsonFile = 'client.json';
 
-        // Vérifier si le fichier existe avant de le lire
-        if (!file_exists($jsonFile)) {
-            die("Le fichier client.json n'existe pas à l'emplacement spécifié.");
-        }
+<?php
+// Chemin vers le fichier JSON des clients
+$chemin_json = 'client.json';
 
-        // Lire le contenu du fichier JSON
-        $json_data = file_get_contents($jsonFile);
+// Vérifier si le fichier JSON existe
+if (file_exists($chemin_json)) {
+    // Lire le contenu du fichier JSON
+    $clients_json = file_get_contents($chemin_json);
 
-        // Convertir le JSON en tableau associatif PHP
-        $clients = json_decode($json_data, true);
+    // Décoder le JSON en tableau associatif PHP
+    $clients = json_decode($clients_json, true);
 
-        // Vérifier si la conversion a réussi
-        if ($clients === null && json_last_error() !== JSON_ERROR_NONE) {
-            die("Erreur lors de la lecture du fichier JSON");
-        }
-
-        // Afficher les clients dans le tableau HTML
+    // Vérifier si le décodage a réussi
+    if ($clients === null && json_last_error() !== JSON_ERROR_NONE) {
+        echo '<p>Erreur lors du décodage du fichier JSON.</p>';
+    } else {
+        // Fonction pour afficher les détails de chaque client
+    function afficherClients($clients) {
         foreach ($clients as $client) {
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($client['Nom'] ?? '') . "</td>";
-            echo "<td>" . htmlspecialchars($client['Prénom'] ?? '') . "</td>";
-            echo "<td>" . htmlspecialchars($client['Email'] ?? '') . "</td>";
-            echo "</tr>";
+            echo '<div class="client">';
+            echo '<h3>' . (isset($client['nom']) ? htmlspecialchars($client['nom']) : 'Nom non spécifié') . '</h3>';
+            echo '<p><strong>' . (isset($client['statut']) ? htmlspecialchars($client['statut']) : 'Statut non spécifié') . '</strong></p>';
+            echo '<p>Email : ' . (isset($client['email']) ? htmlspecialchars($client['email']) : 'Email non spécifié') . '</p>';
+            echo '<p>Numéro de téléphone : ' . (isset($client['telephone']) ? htmlspecialchars($client['telephone']) : 'Numéro non spécifié') . '</p>';
+            echo '<p>Ville : ' . (isset($client['ville']) ? htmlspecialchars($client['ville']) : 'Ville non spécifiée') . '</p>';
+            echo '</div>';
         }
-        ?>
-    </tbody>
-</table>
+    }
 
-</body>
-</html>
+
+        // Affichage des clients dans une structure HTML
+        echo '<!DOCTYPE html>';
+        echo '<html lang="fr">';
+        echo '<head>';
+        echo '<meta charset="UTF-8">';
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+        echo '<title>Nos Clients</title>';
+        echo '<style>';
+        echo 'body { font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0; }';
+        echo '.container { max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }';
+        echo '.client { margin-bottom: 20px; padding: 10px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; }';
+        echo '.client h3 { margin-top: 0; color: #007bff; }';
+        echo '.client p { margin: 5px 0; }';
+        echo '</style>';
+        echo '</head>';
+        echo '<body>';
+        echo '<div class="container">';
+        echo '<h2>Nos Clients</h2>';
+
+        if (!empty($clients)) {
+            afficherClients($clients);
+        } else {
+            echo '<p>Aucun client trouvé.</p>';
+        }
+
+        echo '<a href="index.php">Retour à l\'accueil</a>';
+        echo '</div>';
+        echo '</body>';
+        echo '</html>';
+    }
+} else {
+    echo '<p>Le fichier JSON des clients est introuvable.</p>';
+}
+?>
