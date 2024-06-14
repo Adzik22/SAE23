@@ -23,7 +23,7 @@ creer_footer();
     const timelineData = {
         "title": {
             "media": {
-                "url": "cafe.png",
+                "url": "Cafe.png",
                 "caption": "Notre logo"
             },
             "text": {
