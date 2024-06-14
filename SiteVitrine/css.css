@@ -1,29 +1,22 @@
 body {
-    background-color: #000000;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    color: #ece916;
-    text-align: center;
-  }
-  
-  p {
-    color: #e9e9e9;
-    line-height: 1.6;
-  }
-  
-  .button {
-    background-color: #ed0f0c;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 4px;
-  }
-  
-  .button:hover {
-    background-color: #eea404;
-  }
-  
+  background-color: #000000; /* black */
+  color: #ffff00; /* yellow */
+}
+
+header {
+  background-color: #000000; /* black */
+  color: #ff0000; /* red */
+}
+
+button {
+  background-color: #ff0000; /* red */
+  color: #000000; /* black */
+}
+
+a {
+  color: #ff0000; /* red for links */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ff0000; /* red for headings */
+}

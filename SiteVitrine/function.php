@@ -103,38 +103,42 @@ function creer_header() {
                    </html>';
                }
 
+
 function creer_navbar() {
     echo '
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.php">Home</a>
+    <nav class="navbar navbar-expand-lg" style="background-color: yellow;">
+        <a class="navbar-brand" href="index.php">
+            <img src="cafe.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+            Home
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="menu.php">Menu</a>
+                    <a class="nav-link" href="menu.php" style="color: black;">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="commander.php">Commander</a>
+                    <a class="nav-link" href="commander.php" style="color: black;">Commander</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="qui_sommes_nous.php">Qui sommes-nous</a>
+                    <a class="nav-link" href="qui_sommes_nous.php" style="color: black;">Qui sommes-nous</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="histoire.php">Histoire</a>
+                    <a class="nav-link" href="histoire.php" style="color: black;">Histoire</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="activite.php">Activité</a>
+                    <a class="nav-link" href="activite.php" style="color: black;">Activité</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="partenaires.php">Partenaires</a>
+                    <a class="nav-link" href="partenaires.php" style="color: black;">Partenaires</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.php">About</a>
+                    <a class="nav-link" href="about.php" style="color: black;">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.php">Contact</a>
+                    <a class="nav-link" href="contact.php" style="color: black;">Contact</a>
                 </li>
             </ul>
         </div>
@@ -143,9 +147,12 @@ function creer_navbar() {
 
 
 
+
+
+
 function creer_footer()
 {
-    echo '<footer class="jumbotron bg-secondary text-white text-center">
+    echo '<footer class="jumbotron text-white text-center" style="background-color: red;">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -157,13 +164,13 @@ function creer_footer()
                 <div class="row">
                     <div class="col">
                         <p class="mb-0">&copy; ' . date("Y") . ' Fulguro Miam</p>
-                        <p class="mb-0">Adresse IP: ' . $_SERVER['SERVER_ADDR'] . '</p>
-                        <p class="mb-0">Port: ' . $_SERVER['SERVER_PORT'] . '</p>
                     </div>
                 </div>
             </div>
         </footer>';
 }
+
+
 
 
 

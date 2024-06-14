@@ -4,7 +4,6 @@ include 'function.php';
 
 // Charger les utilisateurs à partir du fichier JSON
 $utilisateurs = json_decode(file_get_contents('utilisateurs.json'), true);
-
 creer_header();
 creer_navbar();
 ?>
