@@ -122,6 +122,12 @@ function creer_navbar() {
                                 <li class="nav-item">
                     <a class="nav-link" href="Cloud.php">Cloud</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Clients.php">Clients</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="gestion_groupe.php">groupes</a>
+                </li>
             </ul>
         </div>
     </nav>
