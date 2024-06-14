@@ -2,7 +2,7 @@
 session_start();
 include 'function2.php'; 
 // Chemin de base pour le stockage des fichiers
-$basePath = 'C:/wamp64/www/SAE INFORMATIQUE FAST FOOD/LUI/Intranet/';
+$basePath = '/var/www/html/Intranet/';
 function lister_fichiers($dossier, $pseudo) {
     $fichiers = scandir($dossier);
     foreach($fichiers as $fichier) {

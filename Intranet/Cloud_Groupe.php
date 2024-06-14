@@ -5,7 +5,7 @@ include 'function2.php';
 creer_header(); 
 creer_navbar(); 
 // Chemin de base pour le stockage des fichiers
-define('BASE_PATH', 'C:/wamp64/www/SAE INFORMATIQUE FAST FOOD/LUI/Intranet/');
+define('BASE_PATH', '/var/www/html/Intranet/');
 define('EMPLOYER_JSON', BASE_PATH . 'employer.json');
 define('UPLOAD_DIR', BASE_PATH . 'groupes/');
 
@@ -110,7 +110,6 @@ if (isset($_GET['download'])) {
     }
     die("Le fichier $file n'existe pas ou vous n'avez pas accès.");
 }
-
 
 // Si un fichier est à supprimer
 if (isset($_GET['delete'])) {
