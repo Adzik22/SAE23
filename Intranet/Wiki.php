@@ -69,6 +69,9 @@ creer_navbar();
             <h3>Accueil</h3>
             <p>La page d'accueil offre une description générale de notre entreprise.</p>
 
+            <h3>Activités</h3>
+            <p>Cette page détaille les différentes activités de l'entreprise.</p>
+
             <h3>Partenaires</h3>
             <p>Nous affichons les logos et les descriptions de nos partenaires.</p>
 
