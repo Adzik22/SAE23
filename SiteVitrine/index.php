@@ -8,9 +8,9 @@ if (!isset($_SESSION['USER'])) {
     $_SESSION['role'] = "visitor";
 }
 
-include 'function.php'; 
-creer_header(); 
-creer_navbar(); 
+include 'function.php';
+creer_header();
+creer_navbar();
 ?>
 
 <main>
