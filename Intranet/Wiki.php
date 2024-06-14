@@ -1,21 +1,4 @@
-<?php
-session_start();
-if (!isset($_SESSION['USER'])) {
-    $_SESSION['USER'] = "anonymous";
-    $_SESSION['email'] = "";
-    $_SESSION['role'] = "visitor";
-}
-include 'function2.php'; 
-creer_header(); 
-creer_navbar(); 
-?>
-
-<main>
-    <div class="container">
-        <h1>Bienvenue sur L'intranet</h1>
-
-
-        <!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
@@ -33,6 +16,9 @@ creer_navbar();
         }
         p {
             margin-top: 0.5rem;
+        }
+        h2 {
+            color: #007bff; /* Change to your preferred color for section titles */
         }
     </style>
 </head>
@@ -72,6 +58,9 @@ creer_navbar();
             <h3>Activités</h3>
             <p>Cette page détaille les différentes activités de l'entreprise.</p>
 
+            <h3>Partenaires</h3>
+            <p>Nous affichons les logos et les descriptions de nos partenaires.</p>
+
             <h3>Contacts</h3>
             <p>Les utilisateurs peuvent nous envoyer un message via un formulaire de contact comprenant leur nom, prénom, adresse mail, numéro de téléphone et un message. Les informations de contact de l'entreprise, telles que l'adresse postale, sont également affichées ici.</p>
         </div>
@@ -105,8 +94,3 @@ creer_navbar();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-<?php
-creer_footer(); 
-?>
