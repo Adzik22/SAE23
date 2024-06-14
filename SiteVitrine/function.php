@@ -108,7 +108,7 @@ function creer_navbar() {
     echo '
     <nav class="navbar navbar-expand-lg" style="background-color: yellow;">
         <a class="navbar-brand" href="index.php">
-            <img src="cafe.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+            <img src="cafe.png" alt="" style="height: 40px; margin-right: 10px;">
             Home
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
