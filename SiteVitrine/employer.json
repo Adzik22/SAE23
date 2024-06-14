@@ -1,27 +1,27 @@
 [
     {
-        "utilisateur": "admin",
-        "motdepasse": "$2y$10$r.pyZ3PL.DBxsanMuSo4PegsOOCkp46zfmGOlEjYaOzD56K6GdC3q",
-        "email": "",
-        "role": "admin",
-        "groupes": [
-            "test3"
-        ]
-    },
-    {
-        "utilisateur": "user",
-        "motdepasse": "$2y$10$wfU1y15bxnl3Y0wbXpL50e2konZQBnP6xgvDTbBcW1nmttBmcChkK",
-        "email": "",
-        "role": "utilisateur",
-        "groupes": []
-    },
-    {
-        "utilisateur": "modo",
-        "motdepasse": "$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa",
-        "email": "modo@modo.com",
-        "role": "moderateur",
-        "groupes": []
-    },
+    "utilisateur": "jean",
+    "motdepasse": "$2y$10$r.pyZ3PL.DBxsanMuSo4PegsOOCkp46zfmGOlEjYaOzD56K6GdC3q",
+    "email": "jeanclaud@gmail.com",
+    "role": "admin",
+    "groupes": [
+        "test3"
+    ]
+},
+{
+    "utilisateur": "jules",
+    "motdepasse": "$2y$10$wfU1y15bxnl3Y0wbXpL50e2konZQBnP6xgvDTbBcW1nmttBmcChkK",
+    "email": "julesb@gmail.com",
+    "role": "utilisateur",
+    "groupes": []
+},
+{
+    "utilisateur": "lucas",
+    "motdepasse": "$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa",
+    "email": "lucasf@gmail.com",
+    "role": "moderateur",
+    "groupes": []
+},
     {
         "utilisateur": "anonymous",
         "motdepasse": "$2y$10$KjUbubNiOZMWhx4pCTE39.Y3X6aveHLCCqBEohBZ71D.r2YY5mrGy",
