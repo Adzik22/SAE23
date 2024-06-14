@@ -266,4 +266,46 @@ function test_utilisateur() {
         return false;
     }   
 }
-?>
+
+function creer_inscription() {
+    // Handle form submission
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $pseudo = $_POST['Pseudo'];
+        $email = $_POST['Mail'];
+        $motdepasse = password_hash($_POST['MotDePasse'], PASSWORD_DEFAULT);
+
+        // Load existing users from employer.json
+        $utilisateurs = json_decode(file_get_contents('employer.json'), true);
+
+        // Create new user array
+        $nouvel_utilisateur = [
+            'utilisateur' => $pseudo,
+            'motdepasse' => $motdepasse,
+            'email' => $email,
+            'role' => 'utilisateur', // Default role for new users
+            'groupes' => []
+        ];
+
+        // Add new user to the array
+        $utilisateurs[] = $nouvel_utilisateur;
+
+        // Save updated users array to employer.json
+        file_put_contents('employer.json', json_encode($utilisateurs));
+
+        // Redirect to a success page or display a success message
+        echo '<div class="alert alert-success" role="alert">Inscription rÃ©ussie! Vous pouvez maintenant vous connecter.</div>';
+    }
+
+    echo '
+    <div style="margin-right: auto; margin-left: auto; width: 50%; text-align: center;">
+        <div style="margin-right: 10px; margin-left: 5px; border-bottom: 1px dotted grey; border-radius: 10px 0px 0 0; padding-top: 10px; padding-bottom: 10px; font-family: "Lucida Handwriting", Arial, serif; text-align:left; padding-left: 15px; font-size: 1.5em; color: #333;">Inscription</div>
+        <form action="" method="post" style="margin-top: 20px; text-align: left;">
+            <div style="padding: 10px; border-radius: 10px; background-color: #f9f9f9; display: inline-block; text-align: left;">
+                <p><label for="Pseudo" style="font-size: 1.2em;">Pseudo</label><br/> <input placeholder="Pseudo" id="Pseudo" name="Pseudo" class="input_perso" required/></p>
+                <p><label for="Mail" style="font-size: 1.2em;">Adresse Mail</label><br/> <input placeholder="Exemple: nom@nom.com" id="Mail" name="Mail" class="input_perso" required/></p>
+                <p><label for="mdp" style="font-size: 1.2em;">Mot de passe</label><br/> <input type="password" placeholder="Mot de passe" id="MDP" name="MotDePasse" class="input_perso" required/></p>
+                <p><button type="submit" style="background-color: #333; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.2em;">S\'inscrire</button></p>
+            </div>
+        </form>
+    </div>
+    '; }
