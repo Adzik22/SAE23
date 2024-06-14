@@ -1,10 +1,8 @@
 <?php
 session_start();
-include 'function.php'; 
-
+include 'function2.php'; 
 // Chemin de base pour le stockage des fichiers
-$basePath = 'C:/wamp64/www/SAE INFORMATIQUE FAST FOOD/SAE INFORMATIQUE/Site Intranet/TP_R209_2/TP R209/';
-
+$basePath = 'C:/wamp64/www/SAE INFORMATIQUE FAST FOOD/LUI/Intranet/';
 function lister_fichiers($dossier, $pseudo) {
     $fichiers = scandir($dossier);
     foreach($fichiers as $fichier) {
@@ -74,7 +72,6 @@ if (isset($_GET['delete'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -87,7 +84,6 @@ if (isset($_GET['delete'])) {
 creer_header(); 
 creer_navbar(); 
 ?>
-
 <div class="container">
     <h2>Uploader un fichier</h2>
     <?php if(isset($message)) { echo "<p>$message</p>"; } ?>
@@ -109,7 +105,6 @@ creer_navbar();
         }
         ?>
     </ul>
-    <h2>Cloud Groupe</h2>
 </div>
 <?php
 creer_footer(); 

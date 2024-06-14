@@ -74,6 +74,10 @@
                 <button type="submit" class="btn btn-light">Connexion</button>
                 <a href="inscription.php" class="btn btn-light">S\'inscrire</a>
             </form>';
+                     // Ajouter le bouton Intranet
+         echo '<form method="POST" action="">
+         <button type="submit" name="intranet" class="btn btn-light">Intranet</button>
+       </form>';
         }
 
     // Vérifier si le bouton de déconnexion a été cliqué
@@ -84,7 +88,12 @@
         header("Refresh:0");
         exit();
     }
-
+    // Vérifier si le bouton Intranet a été cliqué
+    if(isset($_POST['intranet'])) {
+        // Rediriger vers l'intranet
+        header("Location: ../Intranet/index.php");
+        exit();
+    }
     echo '</div>
     </body>
     </html>';
