@@ -31,7 +31,7 @@ creer_header();
         margin-top: 50px;
     }
     .testimonial {
-        background-color: #f9f9f8;
+        background-color: #f9f9f9;
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
@@ -60,5 +60,5 @@ creer_header();
     }
 </style>
 <?php
-creer_footer();
+creer_footer(); 
 ?>
