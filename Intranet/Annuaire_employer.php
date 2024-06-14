@@ -1,6 +1,5 @@
 <?php
 include("function2.php");
-
 // Handle user actions
 supprimer_utilisateur();
 ajouter_utilisateur();
@@ -8,11 +7,9 @@ modifier_role_utilisateur();
 ajouter_groupe();
 ajouter_groupe_utilisateur();
 retirer_groupe_utilisateur();
-
 // Fetch data from JSON files
 $utilisateurs = json_decode(file_get_contents("./employer.json"), true);
 $groupes = json_decode(file_get_contents("./groupes.json"), true);
-
 // Generate navigation bar
 creer_navbar();
 ?>
@@ -29,6 +26,7 @@ creer_navbar();
     <div class="container">
         <div class="row ligne-nombre-utilisateurs">
             <div class="offset-2 col-3">
+                
                 <span class="align-middle">Nombre d'utilisateurs : <?php echo count($utilisateurs) ?></span>
             </div>
             <div class="offset-3 col-3">
@@ -41,7 +39,6 @@ creer_navbar();
                         <tr>
                             <th scope="col">Utilisateur</th>
                             <th scope="col">E-mail</th>
-                            <th scope="col">Mot de passe</th>
                             <th scope="col">Rôle</th>
                             <th scope="col">Groupes</th>
                             <th scope="col">Actions</th>
@@ -52,15 +49,18 @@ creer_navbar();
                             <tr>
                                 <td><?php echo $utilisateur['utilisateur'] ?></td>
                                 <td><?php echo $utilisateur['email'] ?></td>
-                                <td><?php echo $utilisateur['motdepasse'] ?></td>
                                 <td><?php echo $utilisateur['role'] ?></td>
+                                
                                 <td><?php echo isset($utilisateur['groupes']) ? implode(", ", $utilisateur['groupes']) : '' ?></td>
+                                <?php if (test_admin()) : ?>
                                 <td>
                                     <a href="Annuaire_employer.php?action=supprimer_user&id=<?php echo $id ?>" class="btn btn-sm btn-danger material-icons">Supprimer</a>
                                 </td>
+                                <?php endif; ?>
                             </tr>
                             <tr>
                                 <td colspan="6">
+                                <?php if (test_admin() || test_moderateur()) : ?>
                                     <form action="Annuaire_employer.php" method="post" class="row">
                                         <div class="col">
                                             <select class="form-control" name="role" required>
@@ -69,11 +69,17 @@ creer_navbar();
                                                 <option value="moderateur" <?php if ($utilisateur['role'] == 'moderateur') echo 'selected'; ?>>Modérateur</option>
                                             </select>
                                         </div>
+                                        <?php endif; ?>
+
+                                        <?php if (test_admin() || test_moderateur()) : ?>
                                         <div class="col">
+                                             <?php if (test_admin() || test_moderateur()) : ?>
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                                             <input type="submit" class="btn btn-primary btn-block" value="Modifier Rôle">
+                                            <?php endif; ?>
                                         </div>
                                     </form>
+                                    
                                     <form action="Annuaire_employer.php" method="post" class="row mt-2">
                                         <div class="col">
                                             <select class="form-control" name="groupe" required>
@@ -82,12 +88,19 @@ creer_navbar();
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
+                                        <?php endif; ?>
+
+                                        
                                         <div class="col">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                            <?php if (test_admin() || test_moderateur()) : ?>
                                             <input type="hidden" name="action" value="ajouter_groupe_utilisateur">
                                             <input type="submit" class="btn btn-secondary btn-block" value="Ajouter au Groupe">
+                                            <?php endif; ?>
                                         </div>
                                     </form>
+
+                                    <?php if (test_admin() || test_moderateur()) : ?>
                                     <form action="Annuaire_employer.php" method="post" class="row mt-2">
                                         <div class="col">
                                             <select class="form-control" name="groupe" required>
@@ -95,11 +108,16 @@ creer_navbar();
                                                     <option value="<?php echo $groupe; ?>"><?php echo $groupe; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
+                                            <?php endif; ?>
+
+
                                         </div>
                                         <div class="col">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                            <?php if (test_admin() || test_moderateur()) : ?>
                                             <input type="hidden" name="action" value="retirer_groupe_utilisateur">
                                             <input type="submit" class="btn btn-warning btn-block" value="Retirer du Groupe">
+                                            <?php endif; ?>
                                         </div>
                                     </form>
                                 </td>
@@ -111,6 +129,9 @@ creer_navbar();
         </div>
     </div>
     
+
+
+    <?php if (test_admin()) : ?>
     <div class="bg-light">
         <div class="container">
             <h4 class="my-4 col">Ajouter un utilisateur</h4>
@@ -137,20 +158,25 @@ creer_navbar();
             </form>
         </div>
     </div>
-    
-    <div class="bg-light mt-4">
-        <div class="container">
-            <h4 class="my-4 col">Créer un groupe</h4>
-            <form action="Annuaire_employer.php" method="post" class="row">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Nom du groupe" name="nom_groupe" required>
+    <?php endif; ?>
+
+    <?php if (test_admin() || test_moderateur()) : ?>
+            <!-- Contenu à afficher pour les administrateurs ou modérateurs -->
+            <div class="bg-light mt-4">
+                <div class="container">
+                    <h4 class="my-4 col">Créer un groupe</h4>
+                    <form action="Annuaire_employer.php" method="post" class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Nom du groupe" name="nom_groupe" required>
+                        </div>
+                        <div class="col">
+                            <input type="hidden" name="action" value="ajouter_groupe">
+                            <input type="submit" class="btn btn-primary btn-block" value="Créer Groupe">
+                        </div>
+                    </form>
                 </div>
-                <div class="col">
-                    <input type="hidden" name="action" value="ajouter_groupe">
-                    <input type="submit" class="btn btn-primary btn-block" value="Créer Groupe">
-                </div>
-            </form>
-        </div>
-    </div>
+            </div>
+        <?php endif; ?>
+
 </body>
 </html>

@@ -1,111 +1,148 @@
 <?php
 session_start();
-
 // Inclusion des fonctions utilitaires
 include 'function2.php'; 
-
+creer_header(); 
+creer_navbar(); 
 // Chemin de base pour le stockage des fichiers
 define('BASE_PATH', 'C:/wamp64/www/SAE INFORMATIQUE FAST FOOD/LUI/Intranet/');
-define('EMPLOYER_JSON', 'employer.json');
+define('EMPLOYER_JSON', BASE_PATH . 'employer.json');
 define('UPLOAD_DIR', BASE_PATH . 'groupes/');
 
 // Chargement des informations utilisateur depuis le fichier JSON employer.json
-$employers_json = EMPLOYER_JSON;
-if (!file_exists($employers_json)) {
+if (!file_exists(EMPLOYER_JSON)) {
     die("Fichier des employeurs introuvable.");
 }
 
-$employers_data = json_decode(file_get_contents($employers_json), true);
+$employers_data = json_decode(file_get_contents(EMPLOYER_JSON), true);
 if ($employers_data === null) {
     die("Erreur de chargement des données JSON.");
 }
 
+// Fonction pour obtenir les données d'un utilisateur par pseudo
+function obtenir_utilisateur($employers_data, $pseudo) {
+    foreach ($employers_data as $employe) {
+        if ($employe['utilisateur'] === $pseudo) {
+            return $employe;
+        }
+    }
+    return null;
+}
+
+function lister_fichiers($dir) {
+    if (is_dir($dir)) {
+        if ($dh = opendir($dir)) {
+            while (($file = readdir($dh)) !== false) {
+                if ($file != "." && $file != "..") {
+                    echo "<li><a href='?download=$file'>$file</a> | <a href='?delete=$file'>Supprimer</a></li>";
+                }
+            }
+            closedir($dh);
+        }
+    } else {
+        echo "<p>Le répertoire $dir n'existe pas.</p>";
+    }
+}
+
 // Si un fichier est uploadé
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['fichier'])) {
+    if (!isset($_SESSION['pseudo'])) {
+        die("Session utilisateur non définie.");
+    }
     $pseudo = $_SESSION['pseudo'];
-    $userDir = UPLOAD_DIR . $pseudo;
 
-    // Vérifier les groupes auxquels l'utilisateur appartient
-    if (isset($employers_data[$pseudo]['groupes'])) {
-        $groupes = $employers_data[$pseudo]['groupes'];
-
-        // Créer les dossiers des groupes s'ils n'existent pas
-        foreach ($groupes as $groupe) {
-            $groupDir = UPLOAD_DIR . $groupe;
+    $utilisateur = obtenir_utilisateur($employers_data, $pseudo);
+    if ($utilisateur) {
+        // Vérifier les groupes auxquels l'utilisateur appartient
+        if (!empty($utilisateur['groupes'])) {
+            $groupe_selectionne = $_POST['groupe_selectionne'];
+            
+            $groupDir = UPLOAD_DIR . $groupe_selectionne;
             if (!file_exists($groupDir)) {
                 mkdir($groupDir, 0777, true);
             }
-        }
 
-        // Déplacer le fichier dans le dossier de l'utilisateur
-        $targetFile = $userDir . '/' . basename($_FILES['fichier']['name']);
-        if (move_uploaded_file($_FILES['fichier']['tmp_name'], $targetFile)) {
-            $message = "Le fichier a été téléchargé avec succès.";
+            // Déplacer le fichier dans le dossier du groupe
+            $targetFile = $groupDir . '/' . basename($_FILES['fichier']['name']);
+            if (move_uploaded_file($_FILES['fichier']['tmp_name'], $targetFile)) {
+                $message = "Le fichier a été téléchargé avec succès dans le groupe $groupe_selectionne.";
+            } else {
+                $message = "Désolé, une erreur s'est produite lors du téléchargement du fichier.";
+            }
         } else {
-            $message = "Désolé, une erreur s'est produite lors du téléchargement du fichier.";
+            die("Aucun groupe trouvé pour l'utilisateur $pseudo.");
         }
     } else {
-        die("Aucun groupe trouvé pour l'utilisateur $pseudo.");
+        die("Utilisateur non trouvé.");
     }
 }
 
 // Si un fichier est à télécharger
 if (isset($_GET['download'])) {
+    if (!isset($_SESSION['pseudo'])) {
+        die("Session utilisateur non définie.");
+    }
     $file = basename($_GET['download']);
     $pseudo = $_SESSION['pseudo'];
-    $filePath = UPLOAD_DIR . $pseudo . '/' . $file;
 
-    // Vérifier si l'utilisateur a accès au fichier dans son groupe
-    if (file_exists($filePath)) {
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename($filePath) . '"');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($filePath));
-        flush(); // Flush system output buffer
-        readfile($filePath);
-        exit;
-    } else {
-        die("Le fichier $file n'existe pas.");
+    $utilisateur = obtenir_utilisateur($employers_data, $pseudo);
+    if ($utilisateur) {
+        // Vérifier les groupes auxquels l'utilisateur appartient
+        if (!empty($utilisateur['groupes'])) {
+            $fileFound = false;
+            foreach ($utilisateur['groupes'] as $groupe) {
+                $filePath = UPLOAD_DIR . $groupe . '/' . $file;
+                if (file_exists($filePath)) {
+                    // Autoriser le téléchargement du fichier
+                    header('Content-Description: File Transfer');
+                    header('Content-Type: application/octet-stream');
+                    header('Content-Disposition: attachment; filename="' . basename($filePath) . '"');
+                    header('Expires: 0');
+                    header('Cache-Control: must-revalidate');
+                    header('Pragma: public');
+                    header('Content-Length: ' . filesize($filePath));
+                    flush(); // Flush system output buffer
+                    readfile($filePath);
+                    exit;
+                }
+            }
+        }
     }
+    die("Le fichier $file n'existe pas ou vous n'avez pas accès.");
 }
+
 
 // Si un fichier est à supprimer
 if (isset($_GET['delete'])) {
+    if (!isset($_SESSION['pseudo'])) {
+        die("Session utilisateur non définie.");
+    }
     $file = basename($_GET['delete']);
     $pseudo = $_SESSION['pseudo'];
-    $filePath = UPLOAD_DIR . $pseudo . '/' . $file;
 
-    // Vérifier si l'utilisateur a accès au fichier dans son groupe
-    if (file_exists($filePath)) {
-        if (unlink($filePath)) {
-            $message = "Le fichier $file a été supprimé avec succès.";
+    $utilisateur = obtenir_utilisateur($employers_data, $pseudo);
+    if ($utilisateur) {
+        // Vérifier les groupes auxquels l'utilisateur appartient
+        if (!empty($utilisateur['groupes'])) {
+            $groupes = $utilisateur['groupes'];
+            foreach ($groupes as $groupe) {
+                $filePath = UPLOAD_DIR . $groupe . '/' . $file;
+                if (file_exists($filePath)) {
+                    if (unlink($filePath)) {
+                        $message = "Le fichier $file a été supprimé avec succès.";
+                    } else {
+                        $message = "Erreur lors de la suppression du fichier $file.";
+                    }
+                } else {
+                    $message = "Le fichier $file n'existe pas.";
+                }
+            }
         } else {
-            $message = "Erreur lors de la suppression du fichier $file.";
+            die("Aucun groupe trouvé pour l'utilisateur $pseudo.");
         }
     } else {
-        $message = "Le fichier $file n'existe pas.";
+        die("Utilisateur non trouvé.");
     }
-
-
-// Chargement des données utilisateurs depuis le fichier JSON
-$employers_json = 'employer.json';
-if (file_exists($employers_json)) {
-    $employers_data = json_decode(file_get_contents($employers_json), true);
-    if ($employers_data === null) {
-        die("Erreur de chargement des données JSON.");
-    }
-    // Débogage pour vérifier les données chargées
-    echo "<pre>";
-    print_r($employers_data);
-    echo "</pre>";
-} else {
-    die("Fichier des employeurs introuvable.");
-}
-
-
 }
 ?>
 <!DOCTYPE html>
@@ -121,6 +158,19 @@ if (file_exists($employers_json)) {
     <?php if(isset($message)) { echo "<p>$message</p>"; } ?>
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="fichier" required>
+        <?php
+        if (isset($_SESSION['pseudo'])) {
+            $pseudo = $_SESSION['pseudo'];
+            $utilisateur = obtenir_utilisateur($employers_data, $pseudo);
+            if ($utilisateur && !empty($utilisateur['groupes'])) {
+                echo '<select name="groupe_selectionne" required>';
+                foreach ($utilisateur['groupes'] as $groupe) {
+                    echo "<option value=\"$groupe\">$groupe</option>";
+                }
+                echo '</select>';
+            }
+        }
+        ?>
         <button type="submit">Uploader</button>
     </form>
     
@@ -129,18 +179,30 @@ if (file_exists($employers_json)) {
         <?php
         if (isset($_SESSION['pseudo'])) {
             $pseudo = $_SESSION['pseudo'];
-            $userDir = UPLOAD_DIR . $pseudo;
-            if (isset($employers_data[$pseudo]['groupes'])) {
-                echo "<h3>Fichiers de $pseudo</h3>";
-                echo "<ul>";
-                lister_fichiers($userDir);
-                echo "</ul>";
+            $utilisateur = obtenir_utilisateur($employers_data, $pseudo);
+            if ($utilisateur) {
+                if (!empty($utilisateur['groupes'])) {
+                    foreach ($utilisateur['groupes'] as $groupe) {
+                        echo "<h3>Fichiers du groupe $groupe</h3>";
+                        $groupDir = UPLOAD_DIR . $groupe;
+                        echo "<ul>";
+                        lister_fichiers($groupDir);
+                        echo "</ul>";
+                    }
+                } else {
+                    echo "<p>Aucun groupe trouvé pour l'utilisateur $pseudo.</p>";
+                }
             } else {
-                echo "<p>Aucun fichier trouvé pour l'utilisateur $pseudo.</p>";
+                echo "<p>Utilisateur non trouvé.</p>";
             }
         }
         ?>
     </ul>
 </div>
+
+<?php
+creer_footer(); 
+?>
+
 </body>
 </html>

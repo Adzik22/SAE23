@@ -99,7 +99,7 @@ function creer_navbar() {
                     <a class="nav-link" href="Cloud_Groupe.php">Cloud_Groupe</a>
                 </li>
                                 <li class="nav-item">
-                    <a class="nav-link" href="Cloud.php">Cloud</a>
+                    <a class="nav-link" href="Cloud.php">Cloud_Perso</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Inscription.php">inscriptions</a>
@@ -221,8 +221,6 @@ function retirer_groupe_utilisateur() {
     }
 }
 
-
-
 function creer_footer()
 {
     echo '<footer class="jumbotron bg-secondary text-white text-center">
@@ -242,5 +240,30 @@ function creer_footer()
                 </div>
             </div>
         </footer>';
+}
+
+
+function test_admin() {
+    if (isset($_SESSION["USER"]) && $_SESSION["USER"] === "admin") {
+        return true;
+    } else {
+        return false;
+    }   
+}
+
+function test_moderateur() {
+    if (isset($_SESSION["USER"]) && $_SESSION["USER"] === "moderateur") {
+        return true;
+    } else {
+        return false;
+    }   
+
+}
+function test_utilisateur() {
+    if (isset($_SESSION["USER"]) && $_SESSION["USER"] === "utilisateur") {
+        return true;
+    } else {
+        return false;
+    }   
 }
 ?>
