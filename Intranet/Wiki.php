@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+include 'function2.php'; 
+creer_header(); 
+creer_navbar(); 
+?>
+
+
+
 <!doctype html>
 <html lang="fr">
 <head>
