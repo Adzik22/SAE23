@@ -1,20 +1,41 @@
 <?php
+// Inclusion de votre fichier function.php s'il contient des fonctions nécessaires
+include 'function.php';
+
 // Chemin vers le fichier JSON des employés
 $chemin_json = 'employer.json';
 
 // Vérifier si le fichier JSON existe
 if (file_exists($chemin_json)) {
     // Lire le contenu du fichier JSON
-    $employer_json = file_get_contents($chemin_json);
+    $employes_json = file_get_contents($chemin_json);
 
-    // Décoder le JSON en tableau d'objets PHP
-    $employes = json_decode($employer_json);
+    // Décoder le JSON en tableau associatif PHP
+    $employes = json_decode($employes_json, true);
 
     // Vérifier si le décodage a réussi
     if ($employes === null && json_last_error() !== JSON_ERROR_NONE) {
         echo '<p>Erreur lors du décodage du fichier JSON.</p>';
     } else {
-        // Afficher les détails des employés
+        // Fonction pour afficher les détails de chaque employé
+        function afficherEmployes($employes) {
+            foreach ($employes as $employe) {
+                echo '<div class="employe">';
+                echo '<h3>' . (isset($employe['utilisateur']) ? htmlspecialchars($employe['utilisateur']) : 'Nom non spécifié') . '</h3>';
+                echo '<p><strong>' . (isset($employe['role']) ? htmlspecialchars($employe['role']) : 'Rôle non spécifié') . '</strong></p>';
+                echo '<p>' . (isset($employe['email']) ? htmlspecialchars($employe['email']) : 'Email non spécifié') . '</p>';
+                echo '<p>Groupes : ';
+                if (isset($employe['groupes']) && !empty($employe['groupes'])) {
+                    echo implode(', ', $employe['groupes']);
+                } else {
+                    echo 'Aucun groupe spécifié';
+                }
+                echo '</p>';
+                echo '</div>';
+            }
+        }
+
+        // Affichage des employés dans une structure HTML
         echo '<!DOCTYPE html>';
         echo '<html lang="fr">';
         echo '<head>';
@@ -34,14 +55,7 @@ if (file_exists($chemin_json)) {
         echo '<h2>Notre Équipe</h2>';
 
         if (!empty($employes)) {
-            foreach ($employes as $employe) {
-                echo '<div class="employe">';
-                echo '<h3>' . htmlspecialchars($employe->utilisateur) . '</h3>';
-                echo '<p><strong>' . htmlspecialchars($employe->role) . '</strong></p>';
-                echo '<p>' . (isset($employe->email) ? htmlspecialchars($employe->email) : 'Aucun email spécifié') . '</p>';
-                echo '<p>Groupes : ' . (empty($employe->groupes) ? 'Aucun groupe spécifié' : implode(', ', $employe->groupes)) . '</p>';
-                echo '</div>';
-            }
+            afficherEmployes($employes);
         } else {
             echo '<p>Aucun employé trouvé.</p>';
         }
