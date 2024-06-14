@@ -1,24 +1,18 @@
 <?php
 session_start();
-include 'function.php'; 
-
+if (!isset($_SESSION['USER'])) {
+    $_SESSION['USER'] = "anonymous";
+    $_SESSION['email'] = "";
+    $_SESSION['role'] = "visitor";
+}
+include 'function2.php'; 
 creer_header(); 
-
 creer_navbar(); 
-
 ?>
 
 <main>
     <div class="container">
-        <h1>Page d'inscription</h1>
-        <p>Utilisez le formulaire ci-dessous pour créer votre compte.</p>
-    </div>
-</main>
-
-<?php
-creer_inscription();
-?>
-
+        <h1>Bienvenue sur L'intranet</h1>
 <?php
 creer_footer(); 
 ?>

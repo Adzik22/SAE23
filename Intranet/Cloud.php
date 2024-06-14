@@ -2,7 +2,7 @@
 session_start();
 include 'function2.php'; 
 // Chemin de base pour le stockage des fichiers
-$basePath = 'C:/wamp64/www/SAE INFORMATIQUE FAST FOOD/SAE INFORMATIQUE/Site Intranet/TP_R209_2/TP R209/';
+$basePath = 'C:/wamp64/www/SAE INFORMATIQUE FAST FOOD/LUI/Intranet/';
 function lister_fichiers($dossier, $pseudo) {
     $fichiers = scandir($dossier);
     foreach($fichiers as $fichier) {
@@ -53,6 +53,7 @@ if (isset($_GET['download'])) {
         die("Le fichier n'existe pas.");
     }
 }
+
 // Si un fichier est à supprimer
 if (isset($_GET['delete'])) {
     $file = $_GET['delete'];
@@ -104,7 +105,6 @@ creer_navbar();
         }
         ?>
     </ul>
-    <h2>Cloud Groupe</h2>
 </div>
 <?php
 creer_footer(); 
