@@ -18,7 +18,7 @@
             }
         // Si la connexion est réussie, rediriger vers accueil.php
         if($connexion_reussie) {
-            header('Location: Accueil.php');
+            header('Location: intra_accueil.php');
             exit();
         } else {
             $erreur = 'Identifiant ou mot de passe incorrect.';

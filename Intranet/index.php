@@ -9,7 +9,7 @@ include 'function2.php';
 ?>
 <main>
     <div class="container">
-        <h1>Connecter vous</h1>
+        <h1>Connectez-vous</h1>
         </div>
     </div>
 </main>
