@@ -18,22 +18,23 @@ if (file_exists($chemin_json)) {
         echo '<p>Erreur lors du décodage du fichier JSON.</p>';
     } else {
         // Fonction pour afficher les détails de chaque employé
-        function afficherEmployes($employes) {
-            foreach ($employes as $employe) {
-                echo '<div class="employe">';
-                echo '<h3>' . (isset($employe['utilisateur']) ? htmlspecialchars($employe['utilisateur']) : 'Nom non spécifié') . '</h3>';
-                echo '<p><strong>' . (isset($employe['role']) ? htmlspecialchars($employe['role']) : 'Rôle non spécifié') . '</strong></p>';
-                echo '<p>' . (isset($employe['email']) ? htmlspecialchars($employe['email']) : 'Email non spécifié') . '</p>';
-                echo '<p>Groupes : ';
-                if (isset($employe['groupes']) && !empty($employe['groupes'])) {
-                    echo implode(', ', $employe['groupes']);
-                } else {
-                    echo 'Aucun groupe spécifié';
-                }
-                echo '</p>';
-                echo '</div>';
-            }
+function afficherEmployes($employes) {
+    foreach ($employes as $employe) {
+        echo '<div class="employe">';
+        echo '<h3>' . (isset($employe['utilisateur']) ? htmlspecialchars($employe['utilisateur']) : 'Nom non spécifié') . '</h3>';
+        echo '<p><strong>' . (isset($employe['role']) ? htmlspecialchars($employe['role']) : 'Rôle non spécifié') . '</strong></p>';
+        echo '<p>Mail : ' . (isset($employe['email']) ? htmlspecialchars($employe['email']) : 'Email non spécifié') . '</p>';
+        echo '<p>Groupes : ';
+        if (isset($employe['groupes']) && !empty($employe['groupes'])) {
+            echo implode(', ', $employe['groupes']);
+        } else {
+            echo 'Aucun groupe spécifié';
         }
+        echo '</p>';
+        echo '</div>';
+    }
+}
+
 
         // Affichage des employés dans une structure HTML
         echo '<!DOCTYPE html>';
