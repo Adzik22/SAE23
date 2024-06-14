@@ -43,7 +43,7 @@
 <div class="card" style="width:400px">
   <div class="card-body">
     <h4 class="card-title">Cheville 35</h4>
-    <p class="card-text">Pour une viande de qualité</p>
+    <p class="card-text">Pour une viande de qualité.</p>
   </div>
 </div>
 <br>
