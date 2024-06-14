@@ -10,17 +10,6 @@ creer_header();
 creer_navbar(); 
 ?>
 
-<main>
-    <div class="container">
-        <h1>Bienvenue sur L'intranet</h1>
-
-        <?php
-session_start();
-
-include 'function.php'; 
-creer_header(); 
-creer_navbar(); 
-?>
 
 
 <?php
