@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-[{"utilisateur":"admin","motdepasse":"$2y$10$r.pyZ3PL.DBxsanMuSo4PegsOOCkp46zfmGOlEjYaOzD56K6GdC3q","email":"","role":"admin","groupes":["test3","test"]},{"utilisateur":"user","motdepasse":"$2y$10$wfU1y15bxnl3Y0wbXpL50e2konZQBnP6xgvDTbBcW1nmttBmcChkK","email":"","role":"moderateur","groupes":[]},{"utilisateur":"modo","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"modo@modo.com","role":"moderateur","groupes":[]},{"utilisateur":"anonymous","motdepasse":"$2y$10$KjUbubNiOZMWhx4pCTE39.Y3X6aveHLCCqBEohBZ71D.r2YY5mrGy","email":"","role":"utilisateur","groupes":[]},{"utilisateur":"Paul","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"aucaijoir@aucaijoir.com","role":"utilisateur","groupes":[]},{"utilisateur":"Claire","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"qalaicou@qalaicou.com","role":"admin","groupes":[]},{"utilisateur":"Marc","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"mopovaf@mopovaf.com","role":"utilisateur","groupes":[]},{"utilisateur":"Luc","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"odeuvoipoif@odeuvoipoif.com","role":"utilisateur","groupes":[]},{"utilisateur":"Julien","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"noifaumau@noifaumau.com","role":"utilisateur","groupes":[]},{"utilisateur":"Emma","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"neuhagal@neuhagal.com","role":"utilisateur","groupes":[]},{"utilisateur":"Jean","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"beukaita@beukaita.com","role":"utilisateur","groupes":[]},{"utilisateur":"Camille","motdepasse":"$2y$10$EztV.T8zsvz4sXMVAOBiKee.ByapuNsNPfp4BsoVtNNuZtRGn7YKa","email":"rezetar@rezetar.com","role":"utilisateur","groupes":["test"]},{"utilisateur":"test","email":"test@gmail.com","motdepasse":"$2y$10$r.pyZ3PL.DBxsanMuSo4PegsOOCkp46zfmGOlEjYaOzD56K6GdC3q","role":"utilisateur","groupes":["test"]}]
-=======
 [
     {
         "utilisateur": "admin",
@@ -107,4 +104,3 @@
         ]
     }
 ]
->>>>>>> e03d64e47a951130e36ba9f38678a23aa5dd196c

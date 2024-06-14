@@ -1,24 +1,7 @@
 <?php
 session_start();
-<<<<<<< HEAD
-if (!isset($_SESSION['USER'])) {
-    $_SESSION['USER'] = "anonymous";
-    $_SESSION['email'] = "";
-    $_SESSION['role'] = "visitor";
-}
+
 include 'function2.php'; 
-creer_header(); 
-creer_navbar(); 
-?>
-
-<main>
-    <div class="container">
-        <h1>Bienvenue sur L'intranet</h1>
-<?php
-creer_footer(); 
-=======
-
-include 'function.php'; 
 creer_header(); 
 creer_navbar(); 
 ?>
@@ -87,5 +70,4 @@ if (file_exists($chemin_json)) {
 } else {
     echo '<p>Le fichier JSON des clients est introuvable.</p>';
 }
->>>>>>> e03d64e47a951130e36ba9f38678a23aa5dd196c
 ?>
