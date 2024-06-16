@@ -52,15 +52,13 @@ creer_navbar();
                                 <td><?php echo $utilisateur['role'] ?></td>
                                 
                                 <td><?php echo isset($utilisateur['groupes']) ? implode(", ", $utilisateur['groupes']) : '' ?></td>
-                                <?php if (test_admin()) : ?>
+                               
                                 <td>
                                     <a href="Annuaire_employer.php?action=supprimer_user&id=<?php echo $id ?>" class="btn btn-sm btn-danger material-icons">Supprimer</a>
                                 </td>
-                                <?php endif; ?>
                             </tr>
                             <tr>
                                 <td colspan="6">
-                                <?php if (test_admin() || test_moderateur()) : ?>
                                     <form action="Annuaire_employer.php" method="post" class="row">
                                         <div class="col">
                                             <select class="form-control" name="role" required>
@@ -69,14 +67,10 @@ creer_navbar();
                                                 <option value="moderateur" <?php if ($utilisateur['role'] == 'moderateur') echo 'selected'; ?>>Modérateur</option>
                                             </select>
                                         </div>
-                                        <?php endif; ?>
 
-                                        <?php if (test_admin() || test_moderateur()) : ?>
                                         <div class="col">
-                                             <?php if (test_admin() || test_moderateur()) : ?>
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                                             <input type="submit" class="btn btn-primary btn-block" value="Modifier Rôle">
-                                            <?php endif; ?>
                                         </div>
                                     </form>
                                     
@@ -88,19 +82,17 @@ creer_navbar();
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <?php endif; ?>
 
                                         
                                         <div class="col">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                            <?php if (test_admin() || test_moderateur()) : ?>
+    
                                             <input type="hidden" name="action" value="ajouter_groupe_utilisateur">
                                             <input type="submit" class="btn btn-secondary btn-block" value="Ajouter au Groupe">
-                                            <?php endif; ?>
                                         </div>
                                     </form>
 
-                                    <?php if (test_admin() || test_moderateur()) : ?>
+     
                                     <form action="Annuaire_employer.php" method="post" class="row mt-2">
                                         <div class="col">
                                             <select class="form-control" name="groupe" required>
@@ -108,16 +100,16 @@ creer_navbar();
                                                     <option value="<?php echo $groupe; ?>"><?php echo $groupe; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
-                                            <?php endif; ?>
+
 
 
                                         </div>
                                         <div class="col">
                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                            <?php if (test_admin() || test_moderateur()) : ?>
+     
                                             <input type="hidden" name="action" value="retirer_groupe_utilisateur">
                                             <input type="submit" class="btn btn-warning btn-block" value="Retirer du Groupe">
-                                            <?php endif; ?>
+   
                                         </div>
                                     </form>
                                 </td>
@@ -131,7 +123,7 @@ creer_navbar();
     
 
 
-    <?php if (test_admin()) : ?>
+
     <div class="bg-light">
         <div class="container">
             <h4 class="my-4 col">Ajouter un utilisateur</h4>
@@ -158,9 +150,8 @@ creer_navbar();
             </form>
         </div>
     </div>
-    <?php endif; ?>
 
-    <?php if (test_admin() || test_moderateur()) : ?>
+
             <div class="bg-light mt-4">
                 <div class="container">
                     <h4 class="my-4 col">Créer un groupe</h4>
@@ -175,7 +166,7 @@ creer_navbar();
                     </form>
                 </div>
             </div>
-        <?php endif; ?>
+
 
 </body>
 </html>
